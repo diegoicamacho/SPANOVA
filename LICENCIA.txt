@@ -1,0 +1,8 @@
+Spanova © 2026. Todos los derechos reservados.
+
+Se permite usar el sitio https://spanova.lat con fines de ingeniería. Queda prohibido copiar, modificar,
+vender, redistribuir o publicar este programa o partes de él, así como intentar extraer o reconstruir su
+código fuente, sin autorización escrita del titular.
+
+El programa se ofrece como herramienta de apoyo y no sustituye el criterio ni la responsabilidad del
+ingeniero que firma el proyecto.
