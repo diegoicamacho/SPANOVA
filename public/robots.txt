@@ -1,3 +1,7 @@
 User-agent: *
-Allow: /
+Allow: /$
+Allow: /index.html
+Disallow: /app/
+Disallow: /.well-known/
+
 Sitemap: https://spanova.lat/sitemap.xml

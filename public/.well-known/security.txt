@@ -1,0 +1,9 @@
+# Spanova · Política de divulgación de vulnerabilidades
+Contact: mailto:seguridad@spanova.lat
+Preferred-Languages: es, en
+Canonical: https://spanova.lat/.well-known/security.txt
+Policy: https://spanova.lat/
+Expires: 2027-12-31T23:59:59Z
+
+# El código de esta aplicación es propiedad de Spanova © 2026.
+# Prohibido copiar, redistribuir, alojar o realizar ingeniería inversa sin autorización escrita.
