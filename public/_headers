@@ -5,3 +5,8 @@
   Permissions-Policy: camera=(), microphone=(), geolocation=()
 /app/*
   Cache-Control: no-cache
+/escritorio/*
+  Cache-Control: no-cache
+  X-Robots-Tag: noindex
+/descargas/*
+  Content-Disposition: attachment
