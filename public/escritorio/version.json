@@ -1,17 +1,17 @@
 {
   "app": "Spanova",
-  "build": "20261121183405-3b313640",
-  "date": "2026-11-21T18:34:16.498Z",
+  "build": "20261107214910-ec0affa5",
+  "date": "2026-11-07T21:49:19.622Z",
   "bridge": "2026.6.2",
   "min_bridge": "2026.6.2",
   "files": {
     "Spanova.html": {
-      "sha256": "4c4f240123dad713b0d129f4e4ac96f4d68d078d85c7fe2f1f101146ab4a0c69",
-      "size": 3589007
+      "sha256": "187bdfd89bc1006e728ac14273438a1e147ebf9ba168d86b5966c6df278bc004",
+      "size": 3429266
     },
     "biblioteca_spanova.js": {
-      "sha256": "cb845b360ebf2cba14078514fb89dc62670dff629115ea6757aa24ba86114d41",
-      "size": 10247522
+      "sha256": "71c64a9a3ea097ecda3ba0c404650a1cc071b6c22cf4fac05cbd2595e7ce9683",
+      "size": 10247524
     }
   }
 }
