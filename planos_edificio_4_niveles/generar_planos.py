@@ -687,7 +687,8 @@ def lamina_IH01(c):
     titulo_dibujo(c, 280, 115, 'INST. HIDRÁULICA  ·  PLANTA TIPO',
                   'Esc. 1:100   Niveles 1, 2 y 3 (red idéntica en los tres niveles)')
     y = leyenda(c, 380, 392)
-    parrafo(c, 280, 92, [
+    cuadro_muebles(c, 280, 103)
+    parrafo(c, 280, 66, [
         '**Notas',
         '1. Montante 1 alimenta los deptos. A y B (x01, x02); montante 2 los deptos. C y D (x03, x04).',
         '2. Cada departamento tiene en el ducto su llave de paso y medidor; la red interior corre por',
@@ -696,7 +697,60 @@ def lamina_IH01(c):
         '    mezcladora de regadera 1.10 · calentador 1.50.',
         '4. Agua caliente con calentador eléctrico de paso en el área de lavado (ver IH-03).',
         '5. Diámetros en mm: 13 = 1/2"  19 = 3/4"  25 = 1"  32 = 1 1/4"  38 = 1 1/2"  50 = 2"',
-    ], 2.0)
+    ], 1.9)
+
+
+MUEBLES_DEPTO = [  # elemento, ubicación, cantidad, AF, AC
+    ('Inodoro (W.C. de tanque)', 'Baño', 1, 'Sí', '—'),
+    ('Lavabo', 'Baño', 1, 'Sí', 'Sí'),
+    ('Regadera', 'Baño', 1, 'Sí', 'Sí'),
+    ('Fregadero', 'Cocina', 1, 'Sí', 'Sí'),
+    ('Lavadora', 'Lavado', 1, 'Sí', '—'),
+    ('Calentador eléctrico de paso', 'Lavado', 1, 'Entrada', 'Salida'),
+]
+
+
+def tabla_simple(c, x, y, cols, filas, t=1.75, h=3.3, negritas=()):
+    ancho = sum(w for _, w, _ in cols)
+    c.saveState(); c.setFillColor(GRIS_MC); c.rect(x, y - 1.0, ancho, h, fill=1, stroke=0); c.restoreState()
+    for i, fila in enumerate([[tt for tt, _, _ in cols]] + filas):
+        xx = x
+        bold = i == 0 or (i - 1) in negritas
+        for (tt, w, al), v in zip(cols, fila):
+            px = xx + (w / 2 if al == 'c' else (w - 0.8 if al == 'r' else 0.8))
+            texto(c, px, y, str(v), t, 'Helvetica-Bold' if bold else 'Helvetica', al)
+            xx += w
+        c.saveState(); lw(c, 0.08); c.setStrokeColor(GRIS_C)
+        c.line(x, y - 1.0, x + ancho, y - 1.0); c.restoreState()
+        y -= h
+    c.saveState(); lw(c, 0.15); c.rect(x, y + h - 1.0, ancho, (len(filas) + 1) * h, fill=0); c.restoreState()
+    return y
+
+
+def cuadro_muebles(c, x, y):
+    texto(c, x, y, 'CUADRO DE MUEBLES Y EQUIPOS QUE USAN AGUA', 2.4, 'Helvetica-Bold')
+    y -= 5
+    texto(c, x, y, 'Por departamento (los 16 son iguales)', 1.9, 'Helvetica-Bold')
+    filas = [list(m) for m in MUEBLES_DEPTO]
+    filas.append(['Total por departamento', '', 6, '6 salidas', '3 salidas'])
+    tabla_simple(c, x, y - 4, [('Elemento', 36, 'l'), ('Ubicación', 15, 'l'), ('Cant.', 9, 'c'),
+                               ('Agua fría', 15, 'c'), ('Agua cal.', 15, 'c')], filas,
+                 negritas=(len(filas) - 1,))
+    x2 = x + 96
+    texto(c, x2, y, 'Por piso (4 departamentos por piso)', 1.9, 'Helvetica-Bold')
+    filas = []
+    for lev in range(4):
+        filas.append([NIVELES[lev], '%s-%s' % (depto_nombre(lev, 'A'), depto_nombre(lev, 'D')),
+                      4, 4, 4, 4, 4, 4, 24])
+    filas.append(['Total edificio', '16', 16, 16, 16, 16, 16, 16, 96])
+    tabla_simple(c, x2, y - 4, [('Piso', 15, 'l'), ('Deptos.', 13, 'c'), ('W.C.', 8, 'c'),
+                                ('Lav.', 8, 'c'), ('Reg.', 8, 'c'), ('Freg.', 9, 'c'),
+                                ('Lavad.', 10, 'c'), ('Cal.', 8, 'c'), ('Total', 10, 'c')], filas,
+                 negritas=(len(filas) - 1,))
+    texto(c, x2, y - 28.5, 'No hay tina: el baño lleva regadera. Áreas comunes sin salidas de agua.',
+          1.6, col=GRIS)
+    texto(c, x2, y - 31.2, 'Además: 1 cisterna, 2 bombas, tanque hidroneumático y toma municipal.',
+          1.6, col=GRIS)
 
 
 # ----------------------------------------------------------------------
