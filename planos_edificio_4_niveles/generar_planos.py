@@ -25,6 +25,7 @@ from dibujo import (Vista, lw, texto, rect_m, linea_m, cota_h, cota_v, nivel_mar
 
 AQUI = os.path.dirname(os.path.abspath(__file__))
 SALIDA = os.path.join(AQUI, "Planos_Edificio_4_niveles_16_deptos.pdf")
+SALIDA_DXF = os.path.join(AQUI, "Planos_Edificio_4_niveles_16_deptos.dxf")
 
 PW, PH = 594.0, 420.0
 FECHA = "Noviembre 2026"
@@ -1010,6 +1011,15 @@ def main():
         c.restoreState(); c.showPage()
     c.save()
     print('PDF:', SALIDA)
+    # DXF: mismas láminas, una junto a otra en el espacio modelo (mm de pliego)
+    from dxf_canvas import DXFCanvas
+    d = DXFCanvas()
+    for i, f in enumerate((lamina_A01, lamina_A02, lamina_IH01, lamina_IH02, lamina_IH03)):
+        d.saveState(); d.translate(i * (PW + 50), 0)
+        f(d)
+        d.restoreState()
+    d.save(SALIDA_DXF)
+    print('DXF:', SALIDA_DXF)
 
 
 if __name__ == '__main__':
